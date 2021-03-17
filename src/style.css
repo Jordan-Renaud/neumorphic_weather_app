@@ -12,13 +12,13 @@
 
 .location {
     margin: 0;
-    padding-top: 2rem;
-    padding-left: 2rem;
+    padding-top: 2vh;
+    padding-left: 2vw;
 }
 
 .date {
     margin: 0;
-    padding-left: 2rem;
+    padding-left: 2vw;
 }
 
 .search-location {
@@ -101,20 +101,38 @@
 }
 
 .weather-description {
+    position: relative;
     font-size: 2rem;
     margin: 0;
-    
+    top: -1vh;
 }
 
 .todays-weather .details {
     display: inline-block;
+    position: relative;
+    top: -2vh;
     text-align: left;
-    line-height: 2rem;
+    line-height: 2.2rem;
     font-size: 2rem;
     background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
     box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 24px rgba(166, 180, 200, 0.7);
     border-radius: 1rem;
-    
+    padding: 1rem 0.5rem;
+    height: 15vh;
+    margin-left: 0.5rem;
+}
+
+.todays-weather .details .labels {
+    display: inline-block;
+    text-align: center;
+    font-weight: 600;
+    margin-right: 0.4rem;
+    line-height: 2.5rem;
+}
+
+.todays-weather .details .data {
+    display: inline-block;
+    line-height: 2.5rem;
 }
 
 .todays-weather .details p {
@@ -122,22 +140,7 @@
 }
 
 .todays-weather .details img {
-    display: inline;
     width: 2rem;
-}
-
-.todays-weather .details .low {
-}
-
-.todays-weather .details .high {
-}
-
-.todays-weather .details .wind-speed {
-    display: inline;
-}
-
-.todays-weather .details .rain-percent {
-    display: inline;
 }
 
 .future-forecast {
