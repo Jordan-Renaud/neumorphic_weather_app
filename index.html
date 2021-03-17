@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <div class="main-box">
+      <h1 class="location">London, UK</h1>
+      <h2 class="date">Tuesday 16<sup>th</sup>, March</h2>
+
+      <div class="search-location">
+        <button class="get-location-button">
+          <img src="src/get_location_icon.png" alt="map icon" />
+        </button>
+        <input type="text" placeholder="&#xF002; Search city" />
+      </div>
+
+      <div class="todays-weather">
+        <div class="current-weather">
+          <img src="src/weather_icons/cloudy.png" alt="cloudy" />
+          <p class="current-temp">16</p>
+          <button class="celius-to-farenheit">°C</button>
+          <p class="weather-description">Cloudy</p>
+        </div>
+
+        <div class="details">
+          <p class="low">L <span class="low-temp">8</span>°</p>
+          <p class="high">H <span class="high-temp">20</span>°</p>
+          <img src="src/weather_icons/wind_flag.png" alt="wind flag" />
+          <p class="wind-speed">11kmph NW</p>
+          <br />
+          <img src="src/weather_icons/umbrella.png" alt="umbrella icon" />
+          <p class="rain-percent">36%</p>
+        </div>
+      </div>
+
+      <div class="future-forecast">
+        <div class="individual-forecast">
+          <p class="day">Wed</p>
+          <img src="src/weather_icons/sunny.png" alt="sunny" />
+          <p class="temp">12°</p>
+        </div>
+        <div class="individual-forecast">
+          <p class="day">Thu</p>
+          <img src="src/weather_icons/sunny.png" alt="sunny" />
+          <p class="temp">12°</p>
+        </div>
+        <div class="individual-forecast">
+          <p class="day">Fri</p>
+          <img src="src/weather_icons/sunny.png" alt="sunny" />
+          <p class="temp">12°</p>
+        </div>
+        <div class="individual-forecast">
+          <p class="day">Sat</p>
+          <img src="src/weather_icons/sunny.png" alt="sunny" />
+          <p class="temp">12°</p>
+        </div>
+        <div class="individual-forecast">
+          <p class="day">Sun</p>
+          <img src="src/weather_icons/sunny.png" alt="sunny" />
+          <p class="temp">12°</p>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <p>created by Jordan Renaud</p>
+      <a href="https://www.freepik.com/vectors/snow"
+        >Snow vector created by creativepack - www.freepik.com</a
+      >
+      <br />
+      <a href="https://icons8.com/icon/111498/location"
+        >Location icon by Icons8</a
+      >
+    </footer>
+  </body>
+</html>

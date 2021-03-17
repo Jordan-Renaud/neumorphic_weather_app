@@ -1,0 +1,177 @@
+.main-box {
+    display: block;
+    margin: 0 auto;
+    margin-top: 10vh;
+    background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
+    box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 24px rgba(166, 180, 200, 0.7);
+    border-radius: 1rem;
+    width: 70vw;
+    height: 70vh;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+.location {
+    margin: 0;
+    padding-top: 2rem;
+    padding-left: 2rem;
+}
+
+.date {
+    margin: 0;
+    padding-left: 2rem;
+}
+
+.search-location {
+    position: relative;
+    left: 50vw;
+    top: -6vh;
+    width: 15vw;
+}
+
+.search-location input {
+    position: relative;
+    top: -0.6vh;
+    border-color: transparent;
+    height: 2.5rem;
+    width: 15rem;
+    background: linear-gradient(134.17deg, #EEF1F5 4.98%, #E6E9EF 94.88%);
+    box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.75), inset 5px 5px 10px rgba(166, 180, 200, 0.75);
+    border-radius: 40px;
+    padding-left: 0.5rem;
+    font-family: 'Montserrat Alternates', FontAwesome;
+}
+
+.search-location input:focus {
+    outline: none;
+}
+
+.get-location-button {
+    border-color: transparent;
+    background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
+    box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 24px rgba(166, 180, 200, 0.7);
+    border-radius: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.get-location-button:hover {
+    box-shadow: inset 9.91px 9.91px 15px #D9DADE, inset -9.91px -9.91px 15px #FFFFFF;
+}
+
+.get-location-button:focus {
+    outline: none;
+}
+
+.get-location-button img {
+    width: 1.5rem;
+}
+
+.todays-weather {
+    display: block;
+    width: 40vw;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.todays-weather .current-weather {
+    display: inline-block;
+}
+
+
+.current-weather img {
+    display: inline;
+    width: 8rem;
+}
+
+.current-weather .current-temp {
+    display: inline;
+    font-size: 8rem;
+    font-weight: 600;
+}
+
+.celius-to-farenheit {
+    position: relative;
+    top: -7vh;
+    border-color: transparent;
+    background: #EEF0F4;
+    border-radius: 1rem;
+    box-shadow: 9.91px 9.91px 15px #D9DADE, -9.91px -9.91px 15px #FFFFFF;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.weather-description {
+    font-size: 2rem;
+    margin: 0;
+    
+}
+
+.todays-weather .details {
+    display: inline-block;
+    text-align: left;
+    line-height: 2rem;
+    font-size: 2rem;
+    background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
+    box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 24px rgba(166, 180, 200, 0.7);
+    border-radius: 1rem;
+    
+}
+
+.todays-weather .details p {
+    margin: 0;
+}
+
+.todays-weather .details img {
+    display: inline;
+    width: 2rem;
+}
+
+.todays-weather .details .low {
+}
+
+.todays-weather .details .high {
+}
+
+.todays-weather .details .wind-speed {
+    display: inline;
+}
+
+.todays-weather .details .rain-percent {
+    display: inline;
+}
+
+.future-forecast {
+    display: flex;
+    width: 60vw;
+    margin: 0 auto;
+    margin-top: 5vh;
+    justify-content: space-evenly;
+}
+
+.individual-forecast {
+    display: inline-block;
+    background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
+    box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 24px rgba(166, 180, 200, 0.7);
+    border-radius: 1rem;
+    width: 6vw;
+    height: 7vw;
+    text-align: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
+}
+
+.individual-forecast img {
+    width: 3rem;
+}
+
+footer {
+    display: block;
+    margin: 0 auto;
+    width: 70vw;
+    text-align: center;
+}
+
+footer p {
+    margin-top: 2vw;
+    font-size: 1.2rem;
+}
