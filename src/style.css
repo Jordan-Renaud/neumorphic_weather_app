@@ -10,6 +10,12 @@
     font-family: 'Montserrat Alternates', sans-serif;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+
 .location {
     margin: 0;
     padding-top: 2vh;
@@ -19,17 +25,17 @@
 .date {
     margin: 0;
     padding-left: 2vw;
+    font-weight: 100;
 }
 
 .search-location {
-    position: relative;
-    left: 50vw;
-    top: -6vh;
-    width: 15vw;
+    margin-top: 2vh;
+    margin-right: 2vw;
+    width: 50%;
+    text-align: right;
 }
 
 .search-location input {
-    position: relative;
     top: -0.6vh;
     border-color: transparent;
     height: 2.5rem;
@@ -46,6 +52,8 @@
 }
 
 .get-location-button {
+    position: relative;
+    top: 0.7vh;
     border-color: transparent;
     background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
     box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 24px rgba(166, 180, 200, 0.7);
@@ -67,6 +75,7 @@
 }
 
 .todays-weather {
+    margin-top: 20vh;
     display: block;
     width: 40vw;
     margin: 0 auto;
