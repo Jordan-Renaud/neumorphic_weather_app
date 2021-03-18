@@ -36,14 +36,13 @@ header {
 }
 
 .search-location input {
-    top: -0.6vh;
     border-color: transparent;
     height: 2.5rem;
     width: 15rem;
     background: linear-gradient(134.17deg, #EEF1F5 4.98%, #E6E9EF 94.88%);
     box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.75), inset 5px 5px 10px rgba(166, 180, 200, 0.75);
     border-radius: 40px;
-    padding-left: 0.5rem;
+    padding-left: 0.8rem;
     font-family: 'Montserrat Alternates', FontAwesome;
 }
 
@@ -57,7 +56,7 @@ header {
     border-color: transparent;
     background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
     box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 24px rgba(166, 180, 200, 0.7);
-    border-radius: 40px;
+    border-radius: 1rem;
     width: 2.5rem;
     height: 2.5rem;
 }
@@ -75,17 +74,18 @@ header {
 }
 
 .todays-weather {
-    margin-top: 20vh;
-    display: block;
+    padding-top: 6vh;
+    display: flex;
+    flex-wrap: wrap;
     width: 40vw;
-    margin: 0 auto;
+    margin: auto;
     text-align: center;
+    justify-content: center;
 }
 
 .todays-weather .current-weather {
-    display: inline-block;
+    margin-right: 0.5vw;
 }
-
 
 .current-weather img {
     display: inline;
@@ -100,13 +100,21 @@ header {
 
 .celius-to-farenheit {
     position: relative;
-    top: -7vh;
+    top: -8vh;
     border-color: transparent;
     background: #EEF0F4;
     border-radius: 1rem;
     box-shadow: 9.91px 9.91px 15px #D9DADE, -9.91px -9.91px 15px #FFFFFF;
     width: 2.5rem;
     height: 2.5rem;
+}
+
+.celius-to-farenheit:hover {
+    box-shadow: inset 9.91px 9.91px 15px #D9DADE, inset -9.91px -9.91px 15px #FFFFFF;
+}
+
+.celius-to-farenheit:focus {
+    outline: none;
 }
 
 .weather-description {
@@ -117,39 +125,44 @@ header {
 }
 
 .todays-weather .details {
-    display: inline-block;
-    position: relative;
-    top: -2vh;
     text-align: left;
-    line-height: 2.2rem;
+    line-height: 2.5rem;
     font-size: 2rem;
     background: linear-gradient(134.17deg, #EEF0F5 4.98%, #E6E9EF 94.88%);
     box-shadow: -12px -12px 20px rgba(255, 255, 255, 0.8), 10px 10px 24px rgba(166, 180, 200, 0.7);
     border-radius: 1rem;
     padding: 1rem 0.5rem;
-    height: 15vh;
-    margin-left: 0.5rem;
+    height: auto;
+    margin-left: 0.5vw;
 }
 
-.todays-weather .details .labels {
-    display: inline-block;
+.grid-container {
+    display: grid;
+    grid-template-columns: 4rem 10rem;
+    grid-template-rows: 3rem 3rem;
+}
+
+.todays-weather .details .label {
+    padding: 0;
+    margin: 0;
     text-align: center;
     font-weight: 600;
-    margin-right: 0.4rem;
-    line-height: 2.5rem;
 }
 
 .todays-weather .details .data {
-    display: inline-block;
-    line-height: 2.5rem;
-}
-
-.todays-weather .details p {
+    font-weight: 100;
+    font-size: 1.5rem;
+    padding: 0;
     margin: 0;
 }
 
 .todays-weather .details img {
     width: 2rem;
+}
+
+.icon {
+    display: block;
+    margin: 0 auto;
 }
 
 .future-forecast {

@@ -40,18 +40,33 @@
         </div>
 
         <div class="details">
-          <div class="labels">
-            <p class="low">L</p>
-            <p class="high">H</p>
-            <img src="src/weather_icons/wind_flag.png" alt="wind flag" />
-            <br />
-            <img src="src/weather_icons/umbrella.png" alt="umbrella icon" />
-          </div>
-          <div class="data">
-            <p class="low-temp"><span>8</span>°</p>
-            <p class="high-temp"><span>20</span>°</p>
-            <p class="wind-speed">11kmph NW</p>
-            <p class="rain-percentage"><span>36</span>%</p>
+          <div class="grid-container">
+            <div><p class="low label">L</p></div>
+            <div>
+              <p class="low-temp data"><span>8</span>°</p>
+            </div>
+            <div><p class="high label">H</p></div>
+            <div>
+              <p class="high-temp data"><span>20</span>°</p>
+            </div>
+            <div>
+              <img
+                class="icon"
+                src="src/weather_icons/wind_flag.png"
+                alt="wind flag"
+              />
+            </div>
+            <div><p class="wind-speed data">11kmph NW</p></div>
+            <div>
+              <img
+                class="icon"
+                src="src/weather_icons/umbrella.png"
+                alt="umbrella icon"
+              />
+            </div>
+            <div>
+              <p class="rain-percentage data"><span>36</span>%</p>
+            </div>
           </div>
         </div>
       </div>
