@@ -11,8 +11,7 @@ const windSpeedLabel = document.querySelector(".wind-speed");
 
 //functionality variables
 const apiKey = "8d030da1fb95c3588ed90416bc6b659f";
-let celiusTemp = 0;
-let farenheitTemp = 0;
+let isCelius = true;
 let isDayTime = true;
 
 //conversions -windspeed to compass points
@@ -65,6 +64,7 @@ function weatherCodeToImg(code, isDayTime) {
     }
 };
 
+
 //gets current location and triggers handlePostion function
 function getLocation(event) {
     event.preventDefault();
@@ -91,6 +91,7 @@ function updateUI(response) {
     const highTemp = `${Math.floor(JSON.main.temp_max)}°`;
     const windSpeed = `${Math.floor(JSON.wind.speed)}km/h ${windDirectionConversion(JSON.wind.deg)}`;
     locationLabel.innerHTML = currentLocation;
+    dateLabel.innerHTML = getDate();
     currentTempLabel.innerHTML = currentTemp;
     currentWeatherImg.src = weatherImg;
     weatherDescriptionLabel.innerHTML = weatherDescription;
@@ -99,5 +100,20 @@ function updateUI(response) {
     windSpeedLabel.innerHTML = windSpeed;
 };
 
+//get the date for current location
+function getDate() {
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    const now = new Date();
+    const day = `${days[now.getDay()]}`;
+    const month = `${months[now.getMonth()]}`;
+    const date = `${now.getDate()}`
+    
+    return `${day} ${date}<sup>th</sup>, ${month}`;
+}
+
 
 getLocationButton.addEventListener("click", getLocation);
+window.onload = getLocation;
+
