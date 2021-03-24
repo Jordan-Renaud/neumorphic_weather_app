@@ -75,7 +75,7 @@ function getLocation(event) {
 function handlePosition(position){
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
+    const url = `https://api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=${apiKey}&units=metric`
     console.log(url)
     axios.get(url).then(updateUI);
 };
@@ -83,8 +83,8 @@ function handlePosition(position){
 //update data on screen with get location button clicked
 function updateUI(response) {
     const JSON = response.data;
-    const currentLocation = `${JSON.name}, ${JSON.sys.country}`;
-    const currentTemp = `${Math.floor(JSON.main.temp)}`;
+    const currentLocation = `${JSON.city.name}, ${JSON.city.coord.country}`;
+    const currentTemp = `${Math.floor(JSON.list[0].main.temp)}`;
     const weatherImg = `${weatherCodeToImg(JSON.weather[0].id, isDayTime)}`
     const weatherDescription = `${JSON.weather[0].description}`;
     const lowTemp = `${Math.floor(JSON.main.temp_min)}°`;
