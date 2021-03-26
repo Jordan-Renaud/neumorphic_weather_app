@@ -131,14 +131,16 @@ function updateUI(JSONarray) {
     highTempLabel.innerHTML = highTemp;
     rainPercentageLabel.innerHTML = rainPercentage;
     windSpeedLabel.innerHTML = windSpeed;
+
     individualForecasts.forEach((forecast, index) => {
         forecast.querySelectorAll(".forecast-day")[0].innerHTML = futureForecastDays[index];
+
+        let weatherIDs = getWeatherIDs(openWeatherJSON);
+        forecast.querySelectorAll(".forecast-img")[0].src = weatherCodeToImg(weatherIDs[index], isDayTime);
 
         let highArray = getHighs(openWeatherJSON);
         forecast.querySelectorAll(".forecast-temp")[0].innerHTML = `${highArray[index]}°`;
     });
-
-    getWeatherIDs(openWeatherJSON);
 };
 
 //get the date for current location

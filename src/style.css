@@ -103,7 +103,8 @@ header .search-location input {
 
 .current-weather img {
   display: inline;
-  width: 8rem;
+  height: 6rem;
+  width: auto;
 }
 
 .current-weather .current-temp {
@@ -188,19 +189,31 @@ footer {
   display: block;
   margin: 0 auto;
   width: 70vw;
+  font-family: "Montserrat Alternates", sans-serif;
   text-align: center;
 }
 
 footer p {
   margin-top: 2vw;
+  margin-bottom: 0;
   font-size: 1.2rem;
 }
 
 footer a {
   color: black;
   text-decoration: none;
+  transition: all 0.1s ease-in-out;
 }
 
 footer a:hover {
   opacity: 0.7;
+}
+
+footer .github-link {
+  display: block;
+  padding-bottom: 1vw;
+}
+
+footer .resource-link {
+  font-size: 0.8rem;
 }
