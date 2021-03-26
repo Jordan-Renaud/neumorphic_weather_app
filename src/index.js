@@ -2,6 +2,7 @@
 const locationLabel = document.querySelector(".location");
 const dateLabel = document.querySelector(".date");
 const getLocationButton = document.querySelector(".get-location-button");
+const searchCityInput = document.querySelector(".search-city-input");
 
 const currentWeatherImg = document.querySelector(".current-weather-img")
 const currentTempLabel = document.querySelector(".current-temp");
@@ -78,11 +79,16 @@ function handlePosition(position){
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 
+    apiCall(lat, lon);
+};
+
+//call apis
+function apiCall(lat, lon){
     Promise.all([
         getOpenWeatherJSON(lat, lon),
         getLocationKey(lat, lon)
     ]).then(updateUI)
-};
+}
 
 //deals with the openweathermap api
 function getOpenWeatherJSON(lat, lon){
@@ -260,8 +266,34 @@ function getHighs(weatherJSON) {
     return highArray;
 };
 
+//checks the passed in city to see if it is an actual city
+function checkCitySearched(city) {
+    console.log(city)
+    const openWeatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${openWeatherMapAPIkey}&units=metric`
+    console.log(`city url = ${openWeatherURL}`)
+    axios.get(openWeatherURL).then(getCoordsFromCity).catch(incorrectCityName)
+}
+
+//deals with incorrect city names and alerts.
+function incorrectCityName(error){
+    alert("Error finding city, please try again");
+}
+
+//gets the coords for a correct city
+function getCoordsFromCity(JSON) {
+    const lat = `${JSON.data.city.coord.lat}`;
+    const lon = `${JSON.data.city.coord.lon}`;
+    apiCall(lat, lon);
+}
 
 window.onload = getLocation;
 getLocationButton.addEventListener("click", getLocation);
-
+searchCityInput.addEventListener('keyup',  function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        let city = searchCityInput.value;
+        checkCitySearched(city);
+        searchCityInput.value = "";
+      }
+    });
 
