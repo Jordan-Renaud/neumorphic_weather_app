@@ -4,9 +4,10 @@ const dateLabel = document.querySelector(".date");
 const getLocationButton = document.querySelector(".get-location-button");
 const searchCityInput = document.querySelector(".search-city-input");
 
-const currentWeatherImg = document.querySelector(".current-weather-img")
+const currentWeatherImg = document.querySelector(".current-weather-img");
 const currentTempLabel = document.querySelector(".current-temp");
 const weatherDescriptionLabel = document.querySelector(".weather-description");
+const convertTempButton = document.querySelector(".celius-to-farenheit");
 const lowTempLabel = document.querySelector(".low-temp");
 const highTempLabel = document.querySelector(".high-temp");
 const rainPercentageLabel = document.querySelector(".rain-percentage");
@@ -16,7 +17,15 @@ const individualForecasts = document.querySelectorAll(".individual-forecast");
 //functionality variables
 const openWeatherMapAPIkey = "8d030da1fb95c3588ed90416bc6b659f";
 const accuWeatherAPIkey = "PeqNwlVzmYXTRnHfn14Juel2uZejZeRS";
-let isCelius = true;
+let isCelsius = true;
+let celsiusObj = 
+    {currentTemp: 0,
+    lowTemp: 0,
+    highTemp: 0, 
+    windSpeed: 0,
+    windDirection: "", 
+    highArray: []};
+
 let isDayTime = true;
 
 //conversions -windspeed to compass points
@@ -122,19 +131,27 @@ function updateUI(JSONarray) {
     const currentTemp = `${Math.floor(openWeatherJSON.list[0].main.temp)}`;
     const weatherImg = `${weatherCodeToImg(openWeatherJSON.list[0].weather[0].id, isDayTime)}`
     const weatherDescription = `${openWeatherJSON.list[0].weather[0].description}`;
-    const lowTemp = `${Math.floor(accuweatherJSON.DailyForecasts[0].Temperature.Minimum.Value)}°`;
-    const highTemp = `${Math.floor(accuweatherJSON.DailyForecasts[0].Temperature.Maximum.Value)}°`;
+    const lowTemp = Math.floor(accuweatherJSON.DailyForecasts[0].Temperature.Minimum.Value);
+    const highTemp = Math.floor(accuweatherJSON.DailyForecasts[0].Temperature.Maximum.Value);
     const rainPercentage = `${openWeatherJSON.list[0].pop * 100}%`;
     const windSpeed = `${Math.floor(openWeatherJSON.list[0].wind.speed)}km/h ${windDirectionConversion(openWeatherJSON.list[0].wind.deg)}`;
     const futureForecastDays = getFutureDays(date.split(" ")[0]);
+
+    //variable to change between celius and farenheit
+    celsiusObj.currentTemp = currentTemp;
+    celsiusObj.lowTemp = lowTemp;
+    celsiusObj.highTemp = highTemp;
+    celsiusObj.windSpeed = Math.floor(openWeatherJSON.list[0].wind.speed);
+    celsiusObj.windDirection = windDirectionConversion(openWeatherJSON.list[0].wind.deg);
+
 
     locationLabel.innerHTML = currentLocation;
     dateLabel.innerHTML = date;
     currentTempLabel.innerHTML = currentTemp;
     currentWeatherImg.src = weatherImg;
     weatherDescriptionLabel.innerHTML = weatherDescription;
-    lowTempLabel.innerHTML = lowTemp;
-    highTempLabel.innerHTML = highTemp;
+    lowTempLabel.innerHTML = `${lowTemp}°`;
+    highTempLabel.innerHTML = `${highTemp}°`;
     rainPercentageLabel.innerHTML = rainPercentage;
     windSpeedLabel.innerHTML = windSpeed;
 
@@ -145,6 +162,7 @@ function updateUI(JSONarray) {
         forecast.querySelectorAll(".forecast-img")[0].src = weatherCodeToImg(weatherIDs[index], isDayTime);
 
         let highArray = getHighs(openWeatherJSON);
+        celsiusObj.highArray = highArray;
         forecast.querySelectorAll(".forecast-temp")[0].innerHTML = `${highArray[index]}°`;
     });
 };
@@ -286,6 +304,58 @@ function getCoordsFromCity(JSON) {
     apiCall(lat, lon);
 }
 
+
+function updateMeasurementType() {
+    if (isCelsius) {
+        isCelsius = false;
+        setToFarenheit(celsiusObj);
+        convertTempButton.innerHTML = "°F";
+    } else {
+        isCelsius = true;
+        setToCelsius(celsiusObj);
+        convertTempButton.innerHTML = "°C";
+    }
+};
+
+function setToCelsius(tempObj){
+    currentTempLabel.innerHTML = tempObj.currentTemp;
+    lowTempLabel.innerHTML = `${tempObj.lowTemp}°`;
+    highTempLabel.innerHTML = `${tempObj.highTemp}°`;
+    windSpeedLabel.innerHTML = `${tempObj.windSpeed}km/h ${tempObj.windDirection}`;
+
+    individualForecasts.forEach((forecast, index) => {
+        forecast.querySelectorAll(".forecast-temp")[0].innerHTML = `${tempObj.highArray[index]}°`;
+    });
+};
+
+function setToFarenheit(tempObj){
+    let currentTemp = celsiusToFarenheit(tempObj.currentTemp);
+    let lowTemp = celsiusToFarenheit(tempObj.lowTemp);
+    let highTemp = celsiusToFarenheit(tempObj.highTemp);
+    let windSpeed = kmToMiles(tempObj.windSpeed);
+    let highArray = [];
+    tempObj.highArray.forEach(temp => highArray.push(celsiusToFarenheit(temp)));
+    
+    currentTempLabel.innerHTML = currentTemp;
+    lowTempLabel.innerHTML = `${lowTemp}°`;
+    highTempLabel.innerHTML = `${highTemp}°`;
+    windSpeedLabel.innerHTML = `${windSpeed}mph ${tempObj.windDirection}`;
+
+    individualForecasts.forEach((forecast, index) => {
+        forecast.querySelectorAll(".forecast-temp")[0].innerHTML = `${highArray[index]}°`;
+    });
+}
+
+function celsiusToFarenheit(num) {
+    return Math.floor((num * 9/5) + 32);
+}
+
+function kmToMiles(num) {
+    return Math.floor(num/1.609);
+}
+
+
+
 window.onload = getLocation;
 getLocationButton.addEventListener("click", getLocation);
 searchCityInput.addEventListener('keyup',  function (event) {
@@ -296,4 +366,4 @@ searchCityInput.addEventListener('keyup',  function (event) {
         searchCityInput.value = "";
       }
     });
-
+convertTempButton.addEventListener("click", updateMeasurementType);
