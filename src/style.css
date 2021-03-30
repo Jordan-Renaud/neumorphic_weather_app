@@ -123,6 +123,8 @@ header .search-location input {
   display: inline;
   height: 6rem;
   width: auto;
+  max-width: 6rem;
+  object-fit: contain;
 }
 
 .current-weather .current-temp {
