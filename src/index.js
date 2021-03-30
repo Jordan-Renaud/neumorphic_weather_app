@@ -111,7 +111,7 @@ function getOpenWeatherJSON(lat, lon){
 
 //gets the location key to allow accuweather api to call
 function getLocationKey(lat, lon){
-    const url = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${accuWeatherAPIkey}&q=${lat}%2C${lon}&details=true`;
+    const url = `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${accuWeatherAPIkey}&q=${lat}%2C${lon}&details=true`;
     console.log(`geoposition search url = ${url}`)
     return axios.get(url).then(getAccuweatherJSON);
 }
@@ -119,7 +119,7 @@ function getLocationKey(lat, lon){
 //call accuweather api to get the high and low temperature.
 function getAccuweatherJSON(locationJSON) {
     const locationKey = locationJSON.data.Key;
-    const url = `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=${accuWeatherAPIkey}&metric=true`
+    const url = `https://dataservice.accuweather.com/forecasts/v1/daily/1day/${locationKey}?apikey=${accuWeatherAPIkey}&metric=true`
     console.log(`accuweather url = ${url}`)
     return axios.get(url);
 }
