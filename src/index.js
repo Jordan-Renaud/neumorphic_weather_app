@@ -1,4 +1,6 @@
 //document variables
+const loadingScreen = document.querySelector(".loading-screen")
+
 const locationLabel = document.querySelector(".location");
 const dateLabel = document.querySelector(".date");
 const getLocationButton = document.querySelector(".get-location-button");
@@ -80,6 +82,7 @@ function weatherCodeToImg(code, isDayTime) {
 //gets current location and triggers handlePostion function
 function getLocation(event) {
     event.preventDefault();
+    loadingScreen.style.display = "block";
     navigator.geolocation.getCurrentPosition(handlePosition);
 };
 
@@ -165,6 +168,7 @@ function updateUI(JSONarray) {
         celsiusObj.highArray = highArray;
         forecast.querySelectorAll(".forecast-temp")[0].innerHTML = `${highArray[index]}°`;
     });
+    loadingScreen.style.display = "none";
 };
 
 //gets abbreviated array of days for future forecasts
