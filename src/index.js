@@ -127,7 +127,7 @@ function updateUI(JSONarray) {
     const accuweatherJSON = JSONarray[1].data;
 
     const currentLocation = `${openWeatherJSON.city.name}, ${openWeatherJSON.city.country}`;
-    const date = getDate();
+    const date = updateDateForLocation(openWeatherJSON);
     const currentTemp = `${Math.floor(openWeatherJSON.list[0].main.temp)}`;
     const weatherImg = `${weatherCodeToImg(openWeatherJSON.list[0].weather[0].id, isDayTime)}`
     const weatherDescription = `${openWeatherJSON.list[0].weather[0].description}`;
@@ -135,7 +135,7 @@ function updateUI(JSONarray) {
     const highTemp = Math.floor(accuweatherJSON.DailyForecasts[0].Temperature.Maximum.Value);
     const rainPercentage = `${openWeatherJSON.list[0].pop * 100}%`;
     const windSpeed = `${Math.floor(openWeatherJSON.list[0].wind.speed)}km/h ${windDirectionConversion(openWeatherJSON.list[0].wind.deg)}`;
-    const futureForecastDays = getFutureDays(date.split(" ")[0]);
+    const futureForecastDays = getFutureDays(date.day);
 
     //variable to change between celius and farenheit
     celsiusObj.currentTemp = currentTemp;
@@ -146,7 +146,7 @@ function updateUI(JSONarray) {
 
 
     locationLabel.innerHTML = currentLocation;
-    dateLabel.innerHTML = date;
+    dateLabel.innerHTML = date.formatedDate;
     currentTempLabel.innerHTML = currentTemp;
     currentWeatherImg.src = weatherImg;
     weatherDescriptionLabel.innerHTML = weatherDescription;
@@ -159,26 +159,13 @@ function updateUI(JSONarray) {
         forecast.querySelectorAll(".forecast-day")[0].innerHTML = futureForecastDays[index];
 
         let weatherIDs = getWeatherIDs(openWeatherJSON);
-        forecast.querySelectorAll(".forecast-img")[0].src = weatherCodeToImg(weatherIDs[index], isDayTime);
+        forecast.querySelectorAll(".forecast-img")[0].src = weatherCodeToImg(weatherIDs[index], true);
 
         let highArray = getHighs(openWeatherJSON);
         celsiusObj.highArray = highArray;
         forecast.querySelectorAll(".forecast-temp")[0].innerHTML = `${highArray[index]}°`;
     });
 };
-
-//get the date for current location
-function getDate() {
-    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-    const now = new Date();
-    const day = `${days[now.getDay()]}`;
-    const month = `${months[now.getMonth()]}`;
-    const date = `${now.getDate()}`
-    
-    return `${day} ${date}<sup>th</sup>, ${month}`;
-}
 
 //gets abbreviated array of days for future forecasts
 function getFutureDays(currentDay){
@@ -354,6 +341,31 @@ function kmToMiles(num) {
     return Math.floor(num/1.609);
 }
 
+function updateDateForLocation(JSON){
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+    const dateObj = {
+        day: "",
+        formatedDate: ""
+    };
+
+    const timezoneOffset = (JSON.city.timezone)/60;
+    const currentTime = moment.utc().utcOffset(timezoneOffset);
+    const currentDay = days[currentTime.day()];
+    const currentDate = currentTime.date();
+    const month = months[currentTime.month()];
+    const currentTimeUnix = moment.utc().utcOffset(timezoneOffset).unix();
+    const sunrise = JSON.city.sunrise;
+    const sunset = JSON.city.sunset;
+
+    dateObj.day = currentDay;
+    dateObj.formatedDate = `${currentDay} ${currentDate}<sup>th</sup>, ${month}`;
+    
+    isDayTime = (currentTimeUnix >= sunrise && currentTimeUnix <= sunset) ? true : false;
+
+    return dateObj;
+}
 
 
 window.onload = getLocation;
